@@ -34,7 +34,7 @@ import static net.wirelabs.etrex.uploader.utils.JsonUtil.serialize;
 public abstract class StravaHttpInstrumentation {
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
-    private StravaConfiguration stravaConfiguration;
+    protected StravaConfiguration stravaConfiguration;
     private StravaConfigUpdater stravaUpdater;
 
     protected String activitiesUrl;
@@ -47,9 +47,9 @@ public abstract class StravaHttpInstrumentation {
 
 
 
-    protected StravaHttpInstrumentation(StravaConfiguration stravaConfiguration, String baseUrl, String baseTokenUrl) {
-        setupUrls(baseUrl);
-        this.baseTokenUrl = baseTokenUrl;
+    protected StravaHttpInstrumentation(StravaConfiguration stravaConfiguration) {
+        setupUrls(stravaConfiguration.getBaseUrl());
+        this.baseTokenUrl = stravaConfiguration.getBaseTokenUrl();
         this.stravaUpdater = new StravaConfigUpdater(stravaConfiguration);
         this.stravaConfiguration = stravaConfiguration;
     }

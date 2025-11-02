@@ -39,8 +39,9 @@ class UploadServiceTest extends BaseTest {
 
     @Test
     void shouldDisplayUploadDialog() {
-
-        StravaClient stravaClient = new StravaClient(stravaConfiguration, appConfiguration, "localhost:8080", "localhost:8080/token");
+        stravaConfiguration.setBaseUrl("localhost:8080");
+        stravaConfiguration.setBaseTokenUrl("localhost:8080/token");
+        StravaClient stravaClient = new StravaClient(stravaConfiguration, appConfiguration);
         UploadService uploadService = spy(new UploadService(stravaClient, fileService));
 
         UploadDialog fakeUplDlg = spy(new UploadDialog(stravaClient,fileService));

@@ -21,8 +21,8 @@ public class StravaClient extends StravaHttpInstrumentation implements StravaAPI
     private final AppConfiguration appConfiguration;
     private DetailedAthlete currentAthlete;
 
-    public StravaClient(StravaConfiguration stravaConfiguration, AppConfiguration appConfiguration, String baseUrl, String baseTokenUrl) {
-        super(stravaConfiguration, baseUrl, baseTokenUrl);
+    public StravaClient(StravaConfiguration stravaConfiguration, AppConfiguration appConfiguration) {
+        super(stravaConfiguration);
         this.appConfiguration = appConfiguration;
     }
 

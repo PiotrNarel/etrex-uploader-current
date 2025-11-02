@@ -2,7 +2,9 @@ package net.wirelabs.etrex.uploader.configuration;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import net.wirelabs.etrex.uploader.common.Constants;
+
 
 import static net.wirelabs.etrex.uploader.configuration.ConfigurationPropertyKeys.*;
 
@@ -12,6 +14,7 @@ import static net.wirelabs.etrex.uploader.configuration.ConfigurationPropertyKey
 
 @Getter
 @Setter
+@Slf4j
 public class StravaConfiguration extends PropertiesBasedConfiguration {
 
     private String stravaAppId;
@@ -19,6 +22,10 @@ public class StravaConfiguration extends PropertiesBasedConfiguration {
     private String stravaAccessToken;
     private String stravaRefreshToken;
     private Long stravaTokenExpires;
+
+    // urls
+    private String baseTokenUrl;
+    private String baseUrl;
 
 
     public StravaConfiguration(String configFileName) {
@@ -28,6 +35,12 @@ public class StravaConfiguration extends PropertiesBasedConfiguration {
         stravaAccessToken = properties.getProperty(STRAVA_ACCESS_TOKEN, Constants.EMPTY_STRING);
         stravaRefreshToken = properties.getProperty(STRAVA_REFRESH_TOKEN, Constants.EMPTY_STRING);
         stravaTokenExpires = Long.valueOf(properties.getProperty(STRAVA_ACCESS_TOKEN_EXPIRES_AT, "0"));
+        baseTokenUrl = properties.getProperty(STRAVA_BASE_TOKEN_URL, Constants.DEFAULT_STRAVA_TOKEN_URL);
+        baseUrl = properties.getProperty(STRAVA_BASE_URL, Constants.DEFAULT_STRAVA_BASE_URL);
+        if (!configFileExists()) {
+            log.info("Saving new strava config file with default values");
+            save();
+        }
 
     }
 
@@ -37,6 +50,8 @@ public class StravaConfiguration extends PropertiesBasedConfiguration {
         properties.setProperty(STRAVA_ACCESS_TOKEN, stravaAccessToken);
         properties.setProperty(STRAVA_REFRESH_TOKEN, stravaRefreshToken);
         properties.setProperty(STRAVA_ACCESS_TOKEN_EXPIRES_AT, String.valueOf(stravaTokenExpires));
+        properties.setProperty(STRAVA_BASE_TOKEN_URL, baseTokenUrl);
+        properties.setProperty(STRAVA_BASE_URL, baseUrl);
         storePropertiesToFile();
     }
 
