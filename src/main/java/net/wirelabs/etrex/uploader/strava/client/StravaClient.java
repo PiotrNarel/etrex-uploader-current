@@ -61,13 +61,13 @@ public class StravaClient extends StravaHttpInstrumentation implements StravaAPI
 
     @Override
     public List<SummaryActivity> getCurrentAthleteActivities() throws StravaException {
-        return getCurrentAthleteActivities(1, appConfiguration.getPerPage());
+        return getCurrentAthleteActivities(1, stravaConfiguration.getPerPage());
     }
 
     @Override
     public Upload uploadActivity(File file, String name, String desc, SportType sportType, boolean virtual, boolean commute) throws StravaException {
 
-        int uploadWaitTimeSeconds = appConfiguration.getUploadStatusWaitSeconds();
+        int uploadWaitTimeSeconds = stravaConfiguration.getUploadStatusWaitSeconds();
         long uploadStatusTimeout = System.currentTimeMillis() + uploadWaitTimeSeconds * 1000L;
 
         // make upload request

@@ -55,8 +55,8 @@ class UploadServiceTest extends BaseTest {
         uploadService.uploadFile(uploadFile);
 
         Awaitility.waitAtMost(Duration.ofMillis(500)).untilAsserted(() -> {
-            verify(fakeUplDlg).setTrackFile(uploadFile, appConfiguration.getDefaultActivityType());
-            verify(fakeUplDlg).setHostCheckupTimeout(appConfiguration.getStravaCheckTimeout());
+            verify(fakeUplDlg).setTrackFile(uploadFile, stravaConfiguration.getDefaultActivityType());
+            verify(fakeUplDlg).setHostCheckupTimeout(stravaConfiguration.getStravaCheckTimeout());
         });
 
     }

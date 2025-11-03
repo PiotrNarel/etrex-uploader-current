@@ -3,6 +3,7 @@ package net.wirelabs.etrex.uploader.strava.client;
 import com.strava.model.SportType;
 import com.strava.model.Upload;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.wirelabs.etrex.uploader.configuration.StravaConfiguration;
@@ -34,6 +35,7 @@ import static net.wirelabs.etrex.uploader.utils.JsonUtil.serialize;
 public abstract class StravaHttpInstrumentation {
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
+    @Getter
     protected StravaConfiguration stravaConfiguration;
     private StravaConfigUpdater stravaUpdater;
 
